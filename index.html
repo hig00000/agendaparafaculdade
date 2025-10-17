@@ -3,129 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academico on</title>
-    <link rel="shortcut icon" href="./img/academico.jpg" type="image/x-icon">
+    <title>Agenda Acadêmica Digital</title>
     
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./index.css">
+    <!-- Google Identity Services -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-    <!-- Link para a folha de estilos externa -->
-    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 
-    <div class="container">
-
-        <!-- Cabeçalho -->
-        <header class="main-header">
-            <h1>Agenda Acadêmica Digital</h1>
-            <p>Nunca mais esqueça um compromisso importante.</p>
-        </header>
-
-        <main class="main-content">
-
-            <!-- Coluna 1: Adicionar Compromisso -->
-            <div class="card form-card">
-                <h2>Novo Compromisso</h2>
-                <form id="task-form">
-                    <div class="form-group">
-                        <label for="task-title">Título</label>
-                        <input type="text" id="task-title" name="task-title" required class="form-input" placeholder="Ex: Prova de Cálculo">
+    <!-- TELA DE LOGIN -->
+    <div id="login-view" class="login-body">
+        <div class="login-container">
+            <div class="login-card">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h1>Bem-vindo de volta!</h1>
+                <p class="subtitle">Insira as suas credenciais para aceder.</p>
+                
+                <!-- Formulário de Login com Email e Senha -->
+                <form id="login-form">
+                    <div class="form-group-login">
+                        <input type="email" id="login-email" class="login-input" placeholder="Email" required>
                     </div>
-                    <div class="form-group">
-                        <label for="task-date">Data de Entrega</label>
-                        <input type="date" id="task-date" name="task-date" required class="form-input">
+                    <div class="form-group-login">
+                        <input type="password" id="login-password" class="login-input" placeholder="Senha" required>
                     </div>
-                    <div class="form-group">
-                        <label for="task-type">Tipo</label>
-                        <select id="task-type" name="task-type" class="form-input">
-                            <option value="prova">Prova</option>
-                            <option value="trabalho">Trabalho</option>
-                            <option value="atividade">Atividade</option>
-                            <option value="projeto">Projeto</option>
-                            <option value="lembrete">Lembrete Institucional</option>
-                            <option value="outro">Outro</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Adicionar
-                    </button>
+                    <p id="login-error" class="login-error hidden">Email ou senha inválidos.</p>
+                    <button type="submit" class="btn btn-login">Entrar</button>
                 </form>
-            </div>
 
-            <!-- Coluna 2: Lista de Compromissos -->
-            <div class="card tasks-card">
-                <h2>Meus Compromissos</h2>
-                <div id="task-list">
-                    <!-- Compromissos serão inseridos aqui via JavaScript -->
-                    <div id="empty-message" class="empty-state">
-                        <svg class="empty-state-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                        <h3>Nenhum compromisso</h3>
-                        <p>Adicione um novo compromisso para começar.</p>
-                    </div>
-                </div>
-            </div>
-        </main>
-        
-        <!-- Seção de Questionário/Feedback -->
-        <section class="card feedback-card">
-            <h2>Sua Opinião é Importante!</h2>
-            <p class="feedback-subtitle">Responda a este breve questionário para nos ajudar a melhorar esta ferramenta.</p>
-            <form id="feedback-form">
-                <div class="form-group">
-                    <p class="form-label">1. Você acha uma ferramenta como esta útil para a sua vida acadêmica?</p>
-                    <div class="radio-group">
-                        <label><input type="radio" name="util" value="sim"> Sim</label>
-                        <label><input type="radio" name="util" value="nao"> Não</label>
-                        <label><input type="radio" name="util" value="talvez"> Talvez</label>
-                    </div>
-                </div>
-                 <div class="form-group">
-                    <p class="form-label">2. Com que frequência você utilizaria esta agenda?</p>
-                    <div class="radio-group">
-                        <label><input type="radio" name="frequencia" value="diariamente"> Diariamente</label>
-                        <label><input type="radio" name="frequencia" value="semanalmente"> Semanalmente</label>
-                        <label><input type="radio" name="frequencia" value="raramente"> Raramente</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="feedback-features" class="form-label">3. Quais funcionalidades são primordiais para você? (sugestões)</label>
-                    <textarea id="feedback-features" rows="3" class="form-input" placeholder="Ex: Notificações, integração com calendário, compartilhamento..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-success">
-                    Enviar Feedback
-                </button>
-            </form>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="main-footer">
-            <p>direitos reservados
-                github hig00000
-            </p>
-        </footer>
+                <div class="divider">ou</div>
 
-    </div>
+                <!-- Botão de Login com Google -->
+                <div id="g_id_onload"
+                     data-client_id="SEU_CLIENT_ID_DO_GOOGLE_AQUI.apps.googleusercontent.com"
+                     data-callback="handleCredentialResponse"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard" data-size="large" data-theme="outline"
+                     data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+                </div>
 
-    <!-- Modal de confirmação para exclusão -->
-    <div id="modal-container" class="modal-overlay">
-        <div class="modal-content">
-            <h3>Confirmar Exclusão</h3>
-            <p>Você tem certeza que deseja excluir este compromisso?</p>
-            <div class="modal-actions">
-                <button id="confirm-delete-btn" class="btn btn-danger">Sim, Excluir</button>
-                <button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+                 <div class="info-text">
+                    <p>Ainda não tem conta? <a href="#">Registe-se</a></p>
+                 </div>
             </div>
         </div>
     </div>
 
-    <script src="./index.js">
-       
-    </script>
+    <!-- TELA PRINCIPAL DA APLICAÇÃO -->
+    <div id="app-view" class="hidden">
+        <div class="app-container">
+            <header class="main-header">
+                <h1>Agenda Acadêmica Digital</h1>
+                <p>Nunca mais esqueça um compromisso importante.</p>
+                <button id="logout-btn" class="btn">Sair</button>
+            </header>
+
+            <main class="main-content">
+                <!-- Coluna 1: Adicionar Compromisso -->
+                <div class="card form-card">
+                    <h2>Novo Compromisso</h2>
+                    <form id="task-form">
+                        <div class="form-group"><label for="task-title">Título</label><input type="text" id="task-title" required class="form-input" placeholder="Ex: Prova de Cálculo"></div>
+                        <div class="form-group"><label for="task-date">Data de Entrega</label><input type="date" id="task-date" required class="form-input"></div>
+                        <div class="form-group"><label for="task-type">Tipo</label><select id="task-type" class="form-input"><option value="prova">Prova</option><option value="trabalho">Trabalho</option><option value="atividade">Atividade</option><option value="projeto">Projeto</option><option value="lembrete">Lembrete Institucional</option><option value="outro">Outro</option></select></div>
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                    </form>
+                </div>
+
+                <!-- Coluna 2: Lista de Compromissos -->
+                <div class="card tasks-card">
+                    <h2>Meus Compromissos</h2>
+                    <div id="task-list" class="task-list">
+                        <div id="empty-message" class="empty-state">
+                            <svg class="empty-state-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path vector-effect="non-scaling-stroke" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            <h3>Nenhum compromisso</h3><p>Adicione um novo compromisso para começar.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <section class="card feedback-card"><h2 >Sua Opinião é Importante!</h2><p class="feedback-subtitle">Responda a este breve questionário para nos ajudar a melhorar esta ferramenta.</p><form id="feedback-form"><div class="form-group"><p class="form-label">1. Você acha uma ferramenta como esta útil?</p><div class="radio-group"><label><input type="radio" name="util" value="sim"> Sim</label><label><input type="radio" name="util" value="nao"> Não</label><label><input type="radio" name="util" value="talvez"> Talvez</label></div></div><div class="form-group"><p class="form-label">2. Com que frequência você utilizaria?</p><div class="radio-group"><label><input type="radio" name="frequencia" value="diariamente"> Diariamente</label><label><input type="radio" name="frequencia" value="semanalmente"> Semanalmente</label><label><input type="radio" name="frequencia" value="raramente"> Raramente</label></div></div><div class="form-group"><label for="feedback-features" class="form-label">3. Quais funcionalidades são primordiais?</label><textarea id="feedback-features" rows="3" class="form-input" placeholder="Ex: Notificações, integração com calendário..."></textarea></div><button type="submit" class="btn btn-success">Enviar Feedback</button></form></section>
+            
+            <footer class="main-footer"><p>&copy; 2024 Agenda Acadêmica Digital.</p></footer>
+        </div>
+    </div>
+    
+    <!-- MODAL DE CONFIRMAÇÃO -->
+    <div id="modal-container" class="modal-overlay">
+        <div class="modal-content"><h3>Confirmar Exclusão</h3><p>Você tem certeza que deseja excluir este compromisso?</p><div class="modal-actions"><button id="confirm-delete-btn" class="btn btn-danger">Sim, Excluir</button><button id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button></div></div>
+    </div>
+
+
+    <script src="./index.js"></script>
+
 </body>
 </html>
-
