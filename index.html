@@ -12,12 +12,14 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet" />
     
-    <!-- Ligação para a folha de estilos externa -->
-    <link rel="stylesheet" href="index.css">
-
     <!-- Google Identity Services -->
     <script src="https://accounts.google.com/gsi/client" async
         defer></script>
+        
+    <style>
+        /* --- ESTILOS GERAIS --- */
+      
+    </style>
 </head>
 <body>
     <!-- TELA DE LOGIN -->
@@ -37,10 +39,8 @@
                         d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
                 <h1>Bem-vindo de volta!</h1>
-                <p class="subtitle">Insira as suas credenciais para
-                    aceder.</p>
+                <p class="subtitle">Insira as suas credenciais para aceder.</p>
 
-                <!-- Formulário de Login com Email e Senha -->
                 <form id="login-form">
                     <div class="form-group-login">
                         <input
@@ -61,13 +61,11 @@
                     <p id="login-error" class="login-error hidden">
                         Email ou senha inválidos.
                     </p>
-                    <button type="submit"
-                        class="btn btn-login">Entrar</button>
+                    <button type="submit" class="btn btn-login">Entrar</button>
                 </form>
 
                 <div class="divider">ou</div>
 
-                <!-- Botão de Login com Google -->
                 <div
                     id="g_id_onload"
                     data-client_id="417109553653-k121nr7ofinsngjf0b8g4qarstrf2i7b.apps.googleusercontent.com"
@@ -83,11 +81,50 @@
                     data-logo_alignment="left"></div>
 
                 <div class="info-text">
-                    <p>Ainda não tem conta? <a href="#">Registe-se</a></p>
+                    <p>Ainda não tem conta? <a href="#" id="show-register-link">Registe-se</a></p>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- TELA DE REGISTO -->
+    <div id="register-view" class="login-body hidden">
+        <div class="login-container">
+            <div class="login-card">
+                 <svg
+                    class="logo-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h1>Crie a sua conta</h1>
+                <p class="subtitle">É rápido e fácil.</p>
+
+                <form id="register-form">
+                    <div class="form-group-login">
+                        <input type="email" id="register-email" class="login-input" placeholder="Email" required />
+                    </div>
+                    <div class="form-group-login">
+                        <input type="password" id="register-password" class="login-input" placeholder="Senha" required />
+                    </div>
+                    <p id="register-error" class="login-error hidden">Este email já está em uso.</p>
+                     <p id="register-success" class="login-success hidden">Conta criada com sucesso! Pode entrar.</p>
+                    <button type="submit" class="btn btn-login">Registar</button>
+                </form>
+
+                <div class="info-text">
+                    <p>Já tem uma conta? <a href="#" id="show-login-link">Entre aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- TELA PRINCIPAL DA APLICAÇÃO -->
     <div id="app-view" class="hidden">
@@ -151,7 +188,7 @@
                                     stroke-linecap="round"
                                     stroke-linejoin="round"
                                     stroke-width="2"
-                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 M-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             <h3>Nenhum compromisso</h3>
                             <p>Adicione um novo compromisso para
@@ -231,9 +268,10 @@
             </div>
         </div>
     </div>
-
-    <!-- Ligação para o ficheiro JavaScript externo -->
-    <script src="index.js"></script>
+    
+    <script>
+       
+    </script>
 </body>
 </html>
 

@@ -1,11 +1,36 @@
-// --- FUNÇÃO DE CALLBACK DO LOGIN GOOGLE ---
-        // Anexamos a função diretamente ao objeto 'window' para garantir que ela seja global
-        // e acessível pela biblioteca do Google, resolvendo o erro 'callback is not a function'.
+ /**
+         * Função para decodificar o token JWT recebido da Google.
+         * Extrai o payload do token para obter informações do utilizador.
+         */
+        function parseJwt(token) {
+            try {
+                const base64Url = token.split('.')[1];
+                const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+                const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+                }).join(''));
+                return JSON.parse(jsonPayload);
+            } catch (e) {
+                console.error("Erro ao decodificar o token JWT:", e);
+                return null;
+            }
+        }
+
+        /**
+         * Callback global que é chamado pela biblioteca do Google após o login.
+         */
         window.handleCredentialResponse = function(response) {
-            console.log("Login com Google bem-sucedido!");
-            // Dispara um evento personalizado para que a nossa aplicação, que corre dentro do DOMContentLoaded,
-            // saiba que o login aconteceu.
-            document.dispatchEvent(new CustomEvent('google-login-success'));
+            console.log("Credencial recebida do Google.");
+            const userObject = parseJwt(response.credential);
+            
+            if (userObject && userObject.email) {
+                 // Dispara um evento personalizado com o email do utilizador.
+                document.dispatchEvent(new CustomEvent('google-login-success', { 
+                    detail: { email: userObject.email } 
+                }));
+            } else {
+                console.error("Falha ao obter o email do utilizador a partir da credencial do Google.");
+            }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -39,7 +64,6 @@
             const typeStyles = { prova: { label: 'Prova' }, trabalho: { label: 'Trabalho' }, atividade: { label: 'Atividade' }, projeto: { label: 'Projeto' }, lembrete: { label: 'Lembrete' }, outro: { label: 'Outro' } };
 
             // --- FUNÇÕES DE LÓGICA PRINCIPAL ---
-
             const loadUserTasks = () => {
                 const currentUserEmail = localStorage.getItem('currentUser');
                 if (currentUserEmail) {
@@ -58,6 +82,7 @@
             };
             
             const enterApp = (userEmail) => {
+                console.log(`A entrar na aplicação como: ${userEmail}`);
                 localStorage.setItem('userLoggedIn', 'true');
                 localStorage.setItem('currentUser', userEmail);
                 loadUserTasks();
@@ -84,7 +109,6 @@
             };
 
             // --- LÓGICA DE LOGIN E REGISTO ---
-
             showRegisterLink.addEventListener('click', (e) => {
                 e.preventDefault();
                 loginView.classList.add('hidden');
@@ -131,9 +155,12 @@
                 }
             });
             
-            document.addEventListener('google-login-success', () => {
-                const googleUserEmail = 'google_user_placeholder@google.com';
-                enterApp(googleUserEmail);
+            // Ouve o evento personalizado disparado pelo callback do Google
+            document.addEventListener('google-login-success', (event) => {
+                const userEmail = event.detail.email;
+                if(userEmail) {
+                    enterApp(userEmail);
+                }
             });
 
             logoutBtn.addEventListener('click', logout);
