@@ -1,4 +1,4 @@
-  body {
+       body {
             margin: 0;
             font-family: 'Inter', sans-serif;
             background-color: #111827;
@@ -96,21 +96,15 @@
             background-color: #2563EB;
         }
 
-        .login-error {
-            color: #F87171;
+        .login-error, .login-success {
             font-size: 14px;
             margin-top: -8px;
             margin-bottom: 12px;
             text-align: left;
         }
-
-        .login-success {
-            color: #34D399;
-            font-size: 14px;
-            margin-top: -8px;
-            margin-bottom: 12px;
-            text-align: left;
-        }
+        
+        .login-error { color: #F87171; }
+        .login-success { color: #34D399; }
 
         .divider {
             display: flex;
@@ -128,20 +122,28 @@
             border-bottom: 1px solid #374151;
         }
 
-        .divider:not(:empty)::before {
-            margin-right: .25em;
-        }
+        .divider:not(:empty)::before { margin-right: .25em; }
+        .divider:not(:empty)::after { margin-left: .25em; }
 
-        .divider:not(:empty)::after {
-            margin-left: .25em;
-        }
-
-        .g_id_signin {
-            margin: 0 auto;
+        .google-btn {
             display: flex;
+            align-items: center;
             justify-content: center;
-            width: auto !important;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            background-color: #FFF;
+            color: #1F2937;
+            border: 1px solid #D1D5DB;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            gap: 10px;
         }
+        .google-btn:hover { background-color: #F9FAFB; }
+        .google-btn img { width: 20px; height: 20px; }
+
 
         .info-text {
             margin-top: 24px;
@@ -153,6 +155,7 @@
             color: #3B82F6;
             text-decoration: none;
             font-weight: 500;
+            cursor: pointer;
         }
 
         .info-text a:hover {
@@ -369,29 +372,12 @@
             height: 20px;
         }
 
-        .type-prova {
-            border-color: #EF4444;
-        }
-
-        .type-trabalho {
-            border-color: #F59E0B;
-        }
-
-        .type-atividade {
-            border-color: #10B981;
-        }
-
-        .type-projeto {
-            border-color: #3B82F6;
-        }
-
-        .type-lembrete {
-            border-color: #8B5CF6;
-        }
-
-        .type-outro {
-            border-color: #6B7280;
-        }
+        .type-prova { border-color: #EF4444; }
+        .type-trabalho { border-color: #F59E0B; }
+        .type-atividade { border-color: #10B981; }
+        .type-projeto { border-color: #3B82F6; }
+        .type-lembrete { border-color: #8B5CF6; }
+        .type-outro { border-color: #6B7280; }
 
         .empty-state {
             text-align: center;
@@ -456,20 +442,7 @@
             gap: 10px;
         }
 
-        .btn-danger {
-            background-color: #DC2626;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #B91C1C;
-        }
-
-        .btn-secondary {
-            background-color: #4B5563;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #6B7280;
-        }
+        .btn-danger { background-color: #DC2626; color: white; }
+        .btn-danger:hover { background-color: #B91C1C; }
+        .btn-secondary { background-color: #4B5563; color: white; }
+        .btn-secondary:hover { background-color: #6B7280; }
